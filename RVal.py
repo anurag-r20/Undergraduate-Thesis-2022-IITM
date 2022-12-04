@@ -1,4 +1,4 @@
-####### Vortex Ring temporal Evolution with temperature #######################
+####### Vortex Ring temporal Evolution Validation #######################
 import numpy as np
 import matplotlib.pyplot as plt
 import dedalus.public as d3
@@ -8,7 +8,7 @@ import h5py
 
 # Parameters
 Dring = 1 
-Lx, Ly, Lz = 8*Dring, 8*Dring, 10*Dring # size of confinement
+Lx, Ly, Lz = 12*Dring, 12*Dring, 20*Dring # size of confinement
 Nx, Ny, Nz = 64, 64, 72 # grid size
 dealias = 3/2
 dtype = np.float64
@@ -120,7 +120,7 @@ for k in range(Nz):
 	 		if(f_mag[i,j,k]>1e-1):
 	 			T['g'][i,j,k]=0
  			else:
- 				T['g'][i,j,k]=1
+ 				T['g'][i,j,k]=0
  		
 # CFL
 CFL = d3.CFL(solver, initial_dt=max_timestep, cadence=10, safety=0.5, threshold=0.05, max_change=1.5, min_change=0.5, max_dt=max_timestep)
@@ -163,7 +163,7 @@ try:
         if (solver.iteration-1) % 5 == 0:
             count = solver.iteration
         if solver.sim_time != stop_sim_time:
-            file1 = open("With_T/3D_RBC"f"{count}"".tec", "w")
+            file1 = open("Withou_T/3D_RBC"f"{count}"".tec", "w")
             ux = u['g'][0]
             uy = u['g'][1]
             uz = u['g'][2]
